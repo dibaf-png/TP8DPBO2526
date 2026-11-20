@@ -1,0 +1,93 @@
+<!DOCTYPE html> <!-- Mendeklarasikan tipe dokumen HTML5 -->
+<html lang="id"> <!-- Membuka elemen root HTML dengan bahasa dokumen Indonesia -->
+<head> <!-- Membuka bagian kepala dokumen (metadata dan stylesheet) -->
+    <meta charset="utf-8"> <!-- Mengatur encoding karakter dokumen menjadi UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Mengatur viewport agar tata letak responsif di berbagai ukuran layar -->
+    <title>Songs - Music Concert</title> <!-- Menentukan judul halaman yang tampil di tab browser -->
+    <link rel="stylesheet" href="assets/bootstrap.min.css"> <!-- Memuat stylesheet Bootstrap versi terkompresi dari folder assets -->
+</head> <!-- Menutup bagian head -->
+
+<body> <!-- Membuka bagian isi halaman yang tampil di browser -->
+<!-- Navbar navigasi utama antar halaman -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4"> <!-- Membuat bilah navigasi gelap responsif dengan jarak bawah -->
+    <div class="container"> <!-- Membungkus isi navbar agar sejajar di dalam kontainer -->
+        <a class="navbar-brand" href="index.php">Music Concert</a> <!-- Tautan judul/merek aplikasi mengarah ke index.php -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"> <!-- Tombol burger untuk membuka/menutup menu navigasi pada layar kecil -->
+            <span class="navbar-toggler-icon"></span> <!-- Ikon garis tiga pada tombol toggle navbar -->
+        </button> <!-- Menutup tombol toggle navbar -->
+        <div class="collapse navbar-collapse" id="navbarNav"> <!-- Membungkus daftar menu yang dapat diciutkan/diperluas -->
+            <ul class="navbar-nav ms-auto"> <!-- Daftar item navigasi yang diratakan ke kanan (ms-auto) -->
+                <li class="nav-item"><a class="nav-link active" href="index.php">Songs</a></li> <!-- Item menu aktif menuju halaman daftar lagu -->
+                <li class="nav-item"><a class="nav-link" href="artist.php">Artists</a></li> <!-- Item menu menuju halaman daftar artis -->
+                <li class="nav-item"><a class="nav-link" href="concert.php">Concerts</a></li> <!-- Item menu menuju halaman daftar konser -->
+                <li class="nav-item"><a class="nav-link" href="setlist.php">Setlists</a></li> <!-- Item menu menuju halaman setlist -->
+            </ul> <!-- Menutup daftar item navigasi -->
+        </div> <!-- Menutup wadah menu collapse -->
+    </div> <!-- Menutup kontainer navbar -->
+</nav> <!-- Menutup elemen navigasi -->
+
+<div class="container"> <!-- Membuka kontainer utama konten halaman -->
+    <!-- Card Form Tambah / Edit Lagu -->
+    <div class="card mb-4"> <!-- Membuat kartu Bootstrap untuk membungkus form lagu dengan jarak bawah -->
+        <div class="card-header fw-bold">Form Data Lagu</div> <!-- Header kartu dengan teks tebal -->
+        <div class="card-body"> <!-- Membuka isi kartu -->
+            <form action="DATA_FORM_ACTION" method="POST"> <!-- Form pengiriman data POST; action diganti dari Template::replace() -->
+                <div class="row g-3 mb-3"> <!-- Membuka baris grid dengan jarak antar kolom (g-3) dan margin bawah (mb-3) -->
+                    <div class="col-md-4"> <!-- Kolom selebar 4/12 pada layar medium ke atas untuk pilihan artis -->
+                        <label class="form-label">Artis / Penyanyi</label> <!-- Label dropdown pemilihan artis atau penyanyi -->
+                        <select name="artist_id" class="form-select" required> <!-- Dropdown pilihan artis; wajib dipilih sebelum submit -->
+                            DATA_OPTION_ARTIST <!-- Placeholder daftar tag <option> artis yang diisi oleh SongView -->
+                        </select> <!-- Menutup elemen select artis -->
+                    </div> <!-- Menutup kolom artis -->
+                    <div class="col-md-5"> <!-- Kolom selebar 5/12 untuk input judul lagu -->
+                        <label class="form-label">Judul Lagu</label> <!-- Label input judul lagu -->
+                        <input type="text" name="title" class="form-control" value="DATA_TITLE" placeholder="Masukkan judul lagu..." required> <!-- Input teks judul lagu; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom judul lagu -->
+                    <div class="col-md-3"> <!-- Kolom selebar 3/12 untuk input tahun rilis -->
+                        <label class="form-label">Tahun Rilis</label> <!-- Label input tahun rilis lagu -->
+                        <input type="number" name="release_year" class="form-control" value="DATA_YEAR" min="1900" max="2099" placeholder="Contoh: 2024" required> <!-- Input angka tahun rilis dengan batas 1900 sampai 2099 -->
+                    </div> <!-- Menutup kolom tahun rilis -->
+                </div> <!-- Menutup baris grid input form -->
+                <button type="submit" name="DATA_SUBMIT_NAME" class="btn btn-primary">DATA_SUBMIT_TEXT</button> <!-- Tombol submit; atribut name dan teks diganti dinamis oleh Template -->
+                <a href="index.php" class="btn btn-secondary">Reset</a> <!-- Tautan reset untuk mengembalikan form ke kondisi awal -->
+            </form> <!-- Menutup elemen form -->
+        </div> <!-- Menutup isi kartu -->
+    </div> <!-- Menutup kartu form -->
+
+    <!-- Filter Artis -->
+    <form method="GET" action="index.php" class="row g-2 mb-3 align-items-center"> <!-- Form filter berbasis GET agar parameter filter_artist muncul di URL -->
+        <div class="col-auto"> <!-- Kolom otomatis menyesuaikan lebar label -->
+            <label class="fw-bold">Filter Artis:</label> <!-- Label filter berdasarkan artis -->
+        </div> <!-- Menutup kolom label filter -->
+        <div class="col-md-4"> <!-- Kolom selebar 4/12 untuk dropdown filter artis -->
+            <select name="filter_artist" class="form-select" onchange="this.form.submit()"> <!-- Dropdown filter artis; otomatis mengirim form saat pilihan berubah -->
+                DATA_FILTER_ARTIST <!-- Placeholder daftar tag <option> filter artis yang diisi oleh SongView -->
+            </select> <!-- Menutup elemen select filter artis -->
+        </div> <!-- Menutup kolom dropdown filter -->
+        <div class="col-auto"> <!-- Kolom otomatis untuk tombol reset filter -->
+            <a href="index.php" class="btn btn-outline-secondary btn-sm">Tampilkan Semua</a> <!-- Tautan untuk menghapus filter dan menampilkan semua data lagu -->
+        </div> <!-- Menutup kolom tombol reset filter -->
+    </form> <!-- Menutup form filter artis -->
+
+    <!-- Tabel Daftar Lagu -->
+    <div class="table-responsive"> <!-- Membungkus tabel agar dapat di-scroll horizontal pada layar sempit -->
+        <table class="table table-bordered table-hover align-middle"> <!-- Tabel berborder, berefek hover per baris, dan perataan vertikal tengah -->
+            <thead class="table-dark"> <!-- Bagian kepala tabel dengan warna latar gelap -->
+                <tr> <!-- Membuka baris header tabel -->
+                    <th>No</th> <!-- Kolom nomor urut lagu dalam grup -->
+                    <th>Artis</th> <!-- Kolom nama artis -->
+                    <th>Judul Lagu</th> <!-- Kolom judul lagu -->
+                    <th>Tahun Rilis</th> <!-- Kolom tahun rilis lagu -->
+                    <th>Aksi</th> <!-- Kolom tombol aksi edit dan hapus -->
+                </tr> <!-- Menutup baris header tabel -->
+            </thead> <!-- Menutup bagian kepala tabel -->
+            <tbody> <!-- Membuka bagian isi tabel -->
+                DATA_TABEL <!-- Placeholder baris header grup dan data lagu yang diisi oleh SongView -->
+            </tbody> <!-- Menutup bagian isi tabel -->
+        </table> <!-- Menutup tabel daftar lagu -->
+    </div> <!-- Menutup pembungkus tabel responsif -->
+</div> <!-- Menutup kontainer utama -->
+
+<script src="assets/bootstrap.bundle.min.js"></script> <!-- Memuat skrip JS Bootstrap (termasuk Popper) di akhir body -->
+</body> <!-- Menutup body -->
+</html> <!-- Menutup dokumen HTML -->

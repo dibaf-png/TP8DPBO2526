@@ -1,0 +1,72 @@
+<!DOCTYPE html> <!-- Mendeklarasikan tipe dokumen HTML5 -->
+<html lang="id"> <!-- Membuka elemen root HTML dengan bahasa dokumen Indonesia -->
+<head> <!-- Membuka bagian kepala dokumen (metadata dan stylesheet) -->
+    <meta charset="UTF-8"> <!-- Mengatur encoding karakter dokumen menjadi UTF-8 -->
+    <title>Concerts - Music Concert</title> <!-- Menentukan judul halaman yang tampil di tab browser -->
+    <link rel="stylesheet" href="assets/bootstrap.min.css"> <!-- Memuat stylesheet Bootstrap versi terkompresi dari folder assets -->
+</head> <!-- Menutup bagian head -->
+
+<body> <!-- Membuka bagian isi halaman yang tampil di browser -->
+<!-- Navbar navigasi utama antar halaman -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4"> <!-- Membuat bilah navigasi gelap responsif dengan jarak bawah -->
+    <div class="container"> <!-- Membungkus isi navbar agar sejajar di dalam kontainer -->
+        <a class="navbar-brand" href="index.php">Music Concert</a> <!-- Tautan judul/merek aplikasi mengarah ke index.php -->
+        <div class="navbar-nav"> <!-- Membungkus daftar tautan menu navigasi -->
+            <a class="nav-link" href="index.php">Songs</a> <!-- Tautan menu menuju halaman daftar lagu -->
+            <a class="nav-link" href="artist.php">Artists</a> <!-- Tautan menu menuju halaman daftar artis -->
+            <a class="nav-link active" href="concert.php">Concerts</a> <!-- Tautan menu aktif menuju halaman jadwal konser -->
+            <a class="nav-link" href="setlist.php">Setlists</a> <!-- Tautan menu menuju halaman setlist -->
+        </div> <!-- Menutup daftar tautan navigasi -->
+    </div> <!-- Menutup kontainer navbar -->
+</nav> <!-- Menutup elemen navigasi -->
+
+<div class="container"> <!-- Membuka kontainer utama konten halaman -->
+    <!-- Card Form Tambah / Edit Konser -->
+    <div class="card mb-4"> <!-- Membuat kartu Bootstrap untuk membungkus form dengan jarak bawah -->
+        <div class="card-header fw-bold">Form Jadwal Acara Konser</div> <!-- Header kartu dengan teks tebal -->
+        <div class="card-body"> <!-- Membuka isi kartu -->
+            <form action="DATA_FORM_ACTION" method="POST"> <!-- Form pengiriman data POST; action diganti dari Template::replace() -->
+                <div class="row mb-3"> <!-- Membuka baris grid Bootstrap dengan jarak bawah -->
+                    <div class="col-md-4"> <!-- Kolom selebar 4/12 pada layar medium ke atas untuk input nama tur/konser -->
+                        <label class="form-label">Nama Tur / Konser</label> <!-- Label input nama tur atau konser -->
+                        <input type="text" name="tour_name" class="form-control" value="DATA_TOUR" placeholder="Masukkan nama tur..." required> <!-- Input teks nama tur; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom nama tur/konser -->
+                    <div class="col-md-3"> <!-- Kolom selebar 3/12 untuk input kota -->
+                        <label class="form-label">Kota</label> <!-- Label input kota konser -->
+                        <input type="text" name="city" class="form-control" value="DATA_CITY" placeholder="Masukkan nama kota..." required> <!-- Input teks kota; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom kota -->
+                    <div class="col-md-3"> <!-- Kolom selebar 3/12 untuk input lokasi/venue -->
+                        <label class="form-label">Lokasi / Venue</label> <!-- Label input lokasi atau venue konser -->
+                        <input type="text" name="venue" class="form-control" value="DATA_VENUE" placeholder="Masukkan lokasi/venue..." required> <!-- Input teks lokasi/venue; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom lokasi/venue -->
+                    <div class="col-md-2"> <!-- Kolom selebar 2/12 untuk input tanggal konser -->
+                        <label class="form-label">Tanggal Konser</label> <!-- Label input tanggal pelaksanaan konser -->
+                        <input type="date" name="concert_date" class="form-control" value="DATA_DATE" required> <!-- Input pemilih tanggal konser; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom tanggal konser -->
+                </div> <!-- Menutup baris grid input form -->
+                <button type="submit" name="DATA_SUBMIT_NAME" class="btn btn-primary">DATA_SUBMIT_TEXT</button> <!-- Tombol submit; atribut name dan teks diganti dinamis oleh Template -->
+                <a href="concert.php" class="btn btn-secondary">Reset</a> <!-- Tautan reset untuk mengembalikan form ke kondisi awal -->
+            </form> <!-- Menutup elemen form -->
+        </div> <!-- Menutup isi kartu -->
+    </div> <!-- Menutup kartu form -->
+
+    <!-- Tabel Jadwal Konser -->
+    <table class="table table-bordered table-striped"> <!-- Tabel bergaris batas dan selang-seling warna baris -->
+        <thead class="table-dark"> <!-- Bagian kepala tabel dengan warna gelap -->
+            <tr> <!-- Membuka baris header tabel -->
+                <th>No</th> <!-- Kolom nomor urut -->
+                <th>Nama Tur / Konser</th> <!-- Kolom nama tur atau konser -->
+                <th>Kota</th> <!-- Kolom kota penyelenggaraan konser -->
+                <th>Lokasi / Venue</th> <!-- Kolom lokasi atau venue konser -->
+                <th>Tanggal</th> <!-- Kolom tanggal konser -->
+                <th>Aksi</th> <!-- Kolom tombol aksi edit dan hapus -->
+            </tr> <!-- Menutup baris header tabel -->
+        </thead> <!-- Menutup bagian kepala tabel -->
+        <tbody> <!-- Membuka bagian isi tabel -->
+            DATA_TABEL <!-- Placeholder baris data konser yang diisi oleh ConcertView via Template::replace() -->
+        </tbody> <!-- Menutup bagian isi tabel -->
+    </table> <!-- Menutup tabel jadwal konser -->
+</div> <!-- Menutup kontainer utama -->
+<script src="assets/bootstrap.bundle.min.js"></script> <!-- Memuat skrip JS Bootstrap (termasuk Popper) di akhir body -->
+</body> <!-- Menutup body -->
+</html> <!-- Menutup dokumen HTML -->

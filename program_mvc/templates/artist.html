@@ -1,0 +1,72 @@
+<!DOCTYPE html> <!-- Mendeklarasikan tipe dokumen HTML5 -->
+<html lang="id"> <!-- Membuka elemen root HTML dengan bahasa dokumen Indonesia -->
+<head>
+    <meta charset="UTF-8"> <!-- Mengatur encoding karakter dokumen menjadi UTF-8 -->
+    <title>Artists - Music Concert</title> <!-- Menentukan judul halaman yang tampil di tab browser -->
+    <link rel="stylesheet" href="assets/bootstrap.min.css"> <!-- Memuat stylesheet Bootstrap versi terkompresi dari folder assets -->
+</head> 
+
+<body>
+<!-- Navbar navigasi utama antar halaman -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4"> <!-- Membuat bilah navigasi gelap responsif dengan margin bawah -->
+    <div class="container"> <!-- Membungkus isi navbar agar sejajar di dalam kontainer -->
+        <a class="navbar-brand" href="index.php">Music Concert</a> <!-- Tautan judul/merek aplikasi mengarah ke index.php -->
+        <div class="navbar-nav"> <!-- Membungkus daftar tautan menu navigasi -->
+            <a class="nav-link" href="index.php">Songs</a> <!-- Tautan menu menuju halaman daftar lagu -->
+            <a class="nav-link active" href="artist.php">Artists</a> <!-- Tautan menu aktif menuju halaman kelola artis -->
+            <a class="nav-link" href="concert.php">Concerts</a> <!-- Tautan menu menuju halaman daftar konser -->
+            <a class="nav-link" href="setlist.php">Setlists</a> <!-- Tautan menu menuju halaman setlist -->
+        </div>
+    </div> 
+</nav>
+
+<div class="container"> <!-- Membuka kontainer utama konten halaman -->
+    <!-- Card Form Tambah / Edit Artis -->
+    <div class="card mb-4"> <!-- Membuat kartu Bootstrap untuk membungkus form dengan margin bawah -->
+        <div class="card-header fw-bold">Form Kelola Artis</div> <!-- Header kartu dengan teks tebal -->
+        <div class="card-body"> <!-- Membuka isi kartu -->
+            <form action="DATA_FORM_ACTION" method="POST"> <!-- Form pengiriman data POST; action diganti dari Template::replace() -->
+                <div class="row mb-3"> <!-- Membuka baris grid Bootstrap dengan jarak bawah -->
+                    <div class="col-md-4"> <!-- Kolom selebar 4/12 pada layar medium ke atas untuk input nama artis -->
+                        <label class="form-label">Nama Artis</label> <!-- Label input nama artis -->
+                        <input type="text" name="name" class="form-control" value="DATA_NAME" placeholder="Masukkan nama artis..." required> <!-- Input teks nama artis; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom nama artis -->
+                    <div class="col-md-3"> <!-- Kolom selebar 3/12 untuk input negara asal -->
+                        <label class="form-label">Negara Asal</label> <!-- Label input negara asal -->
+                        <input type="text" name="country" class="form-control" value="DATA_COUNTRY" placeholder="Masukkan negara asal..." required> <!-- Input teks negara asal; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom negara asal -->
+                    <div class="col-md-2"> <!-- Kolom selebar 2/12 untuk input tahun debut -->
+                        <label class="form-label">Tahun Debut</label> <!-- Label input tahun debut -->
+                        <input type="number" name="debut_year" class="form-control" value="DATA_DEBUT" min="1900" max="2099" placeholder="Contoh: 2015" required> <!-- Input angka tahun debut dengan batas 1900 sampai 2099 -->
+                    </div> <!-- Menutup kolom tahun debut -->
+                    <div class="col-md-3"> <!-- Kolom selebar 3/12 untuk input genre musik -->
+                        <label class="form-label">Genre Musik</label> <!-- Label input genre musik -->
+                        <input type="text" name="genre" class="form-control" value="DATA_GENRE" placeholder="Masukkan genre musik..." required> <!-- Input teks genre musik; value diisi saat mode edit -->
+                    </div> <!-- Menutup kolom genre musik -->
+                </div> <!-- Menutup baris grid input form -->
+                <button type="submit" name="DATA_SUBMIT_NAME" class="btn btn-primary">DATA_SUBMIT_TEXT</button> <!-- Tombol submit; atribut name dan teks diganti dinamis oleh Template -->
+                <a href="artist.php" class="btn btn-secondary">Reset</a> <!-- Tombol/tautan reset untuk mengembalikan form ke kondisi awal -->
+            </form> <!-- Menutup elemen form -->
+        </div> <!-- Menutup isi kartu -->
+    </div> <!-- Menutup kartu form -->
+
+    <!-- Tabel Daftar Artis -->
+    <table class="table table-bordered table-striped"> <!-- Tabel bergaris batas dan selang-seling warna baris -->
+        <thead class="table-dark"> <!-- Bagian kepala tabel dengan warna gelap -->
+            <tr> <!-- Membuka baris header tabel -->
+                <th>No</th> <!-- Kolom nomor urut -->
+                <th>Nama Artis</th> <!-- Kolom nama artis -->
+                <th>Negara Asala</th> <!-- Kolom negara asal (ada typo 'Asala', sebaiknya 'Negara Asal') -->
+                <th>Tahun Debut</th> <!-- Kolom tahun debut -->
+                <th>Genre Musik</th> <!-- Kolom genre musik -->
+                <th>Aksi</th> <!-- Kolom tombol aksi edit dan hapus -->
+            </tr> <!-- Menutup baris header tabel -->
+        </thead> <!-- Menutup bagian kepala tabel -->
+        <tbody> <!-- Membuka bagian isi tabel -->
+            DATA_TABEL <!-- Placeholder baris data artis yang diisi oleh ArtistView via Template::replace() -->
+        </tbody> <!-- Menutup bagian isi tabel -->
+    </table> <!-- Menutup tabel daftar artis -->
+</div> <!-- Menutup kontainer utama -->
+<script src="assets/bootstrap.bundle.min.js"></script> <!-- Memuat skrip JS Bootstrap (termasuk Popper) di akhir body -->
+</body> <!-- Menutup body -->
+</html> <!-- Menutup dokumen HTML -->s
